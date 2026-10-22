@@ -1,37 +1,160 @@
-# DoList — AUREX Month 2 Week 1
+# DoList — React Task Manager
 
-Converted from the supplied **Month 1 Week 4 JavaScript Task Management Application**. Original visual CSS, UI layout, task validation, edit/delete/complete, filters, clear actions and browser storage are retained. The original `aurexWeek4Tasks` localStorage key is retained, so saved tasks in the same browser/origin may be reused.
+### AUREX Full-Stack Engineering Internship | Month 2 — Week 1
 
-## Run
+A responsive task management web application developed using **React.js, JavaScript, CSS3, and Vite** as part of the AUREX Full-Stack Engineering Internship.
 
-1. Open this folder in VS Code.
-2. Run `npm install` (or `npm.cmd install` in PowerShell if scripts are blocked).
-3. Run `npm run dev` (or `npm.cmd run dev`).
-4. Open the URL shown by Vite.
+This project converts a previously developed JavaScript-based task manager into a component-based React application, focusing on reusable components, state management, user interaction, and browser-based data persistence.
 
-## React component tree
+## Live Demo
 
-- `App`: owns task list, filtering and editing state, handles actions and localStorage persistence.
-- `Header`: displays visible task count via props.
-- `TaskForm`: controlled input, validation, add/update and cancel.
-- `TaskList`: renders list and empty states.
-- `TaskItem`: task row, complete/edit/delete buttons.
+**Live Website:** https://aurex-fullstack-internship-month2.vercel.app/
 
-## Test checklist
+**GitHub Repository:** https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2
 
-- [ ] Add task and see it immediately
-- [ ] Reject blank and 1–2 character tasks
-- [ ] Mark complete and return to active
-- [ ] Edit and delete tasks
-- [ ] Filter All / Active / Completed
-- [ ] Clear completed and delete all (confirmation)
-- [ ] Refresh: tasks remain saved
-- [ ] Test phone-size responsive layout
+## Features
 
-## Submission
+- **Add Tasks:** Create new tasks easily.
+- **Edit Tasks:** Update existing task information.
+- **Delete Tasks:** Remove unwanted tasks.
+- **Mark as Completed:** Track completed and pending tasks.
+- **Search Tasks:** Quickly find tasks using search.
+- **Filter Tasks:** View tasks based on their completion status.
+- **Local Storage:** Save tasks in the browser so they remain available after refreshing.
+- **Responsive Design:** User-friendly layout for desktop and mobile devices.
+- **React Components:** Organized and reusable UI components.
 
-Commit code to GitHub, deploy to Vercel/Netlify, and attach screenshots, live URL, technology list, learning summary and issues. Those external steps require your accounts and testing.
+## Technologies Used
 
-## What changed from vanilla JS?
+| Technology | Purpose |
+|---|---|
+| React.js | Building interactive user interfaces |
+| JavaScript (ES6+) | Application logic and functionality |
+| HTML5 | Webpage structure |
+| CSS3 | Styling and responsive design |
+| Vite | Development server and build tool |
+| Local Storage | Browser-based task persistence |
+| Git & GitHub | Version control and source code hosting |
+| Vercel | Frontend deployment |
 
-`document.getElementById`, `innerHTML` and manual event listeners were replaced with JSX, component props, `useState`, `useEffect` and declarative React event handlers.
+## Project Structure
+
+```text
+week-1-react-task-manager/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── TaskForm.jsx
+│   │   ├── TaskItem.jsx
+│   │   └── TaskList.jsx
+│   ├── styles/
+│   │   └── main.css
+│   ├── App.jsx
+│   └── main.jsx
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+## React Component Overview
+
+**App.jsx:** Main application component responsible for managing tasks, state, and application functionality.
+
+**Header.jsx:** Displays the application heading and header interface.
+
+**TaskForm.jsx:** Provides the form for adding or updating tasks.
+
+**TaskList.jsx:** Displays the collection of tasks.
+
+**TaskItem.jsx:** Represents an individual task with available actions.
+
+## Installation and Setup
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2.git
+```
+
+**2. Navigate to the project folder**
+
+```bash
+cd aurex-fullstack-internship-month2/week-1-react-task-manager
+```
+
+**3. Install dependencies**
+
+```bash
+npm install
+```
+
+**4. Start the development server**
+
+```bash
+npm run dev
+```
+
+**5. Open the application**
+
+Visit the local URL displayed in your terminal, usually:
+
+```text
+http://localhost:5173/
+```
+
+## How It Works
+
+1. The user enters task information through the task form.
+2. React updates the application state to display the new task.
+3. Users can edit, delete, search, filter, or complete tasks.
+4. Task data is saved in browser local storage.
+5. Saved tasks are restored when the application is refreshed.
+
+## Testing
+
+The following functionality has been tested:
+
+- Adding new tasks
+- Editing existing tasks
+- Deleting tasks
+- Marking tasks as completed
+- Searching tasks
+- Filtering tasks
+- Retaining task data after refreshing the page
+- Running the deployed application on Vercel
+
+## Learning Outcomes
+
+During Week 1, I gained practical experience in:
+
+- Creating a React application using Vite.
+- Understanding JSX and component-based architecture.
+- Building reusable React components.
+- Managing application state using React hooks.
+- Handling events and user input.
+- Implementing CRUD-style operations on frontend task data.
+- Using local storage for data persistence.
+- Organizing a React project into maintainable files.
+- Using Git and GitHub for version control.
+- Deploying a React application using Vercel.
+
+## Internship Information
+
+**Internship:** AUREX Full-Stack Engineering Internship  
+**Month:** 2  
+**Week:** 1  
+**Project:** React Task Manager  
+**Developer:** Hafza Eeman  
+**Deployment Platform:** Vercel  
+**Status:** Completed
+
+## Future Improvements
+
+This React Task Manager will serve as a foundation for learning backend development, REST APIs, MongoDB, authentication, and full-stack integration during the upcoming internship weeks.
+
+---
+
+**Developed as part of the AUREX Full-Stack Engineering Internship — Month 2, Week 1.**
