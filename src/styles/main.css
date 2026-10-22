@@ -1,0 +1,539 @@
+/* ==========================================
+   AUREX MONTH 2 - WEEK 1
+   REACT DOLIST TASK MANAGER
+========================================== */
+
+/* GLOBAL STYLES */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #252b43;
+  background: #f4f3ff;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #b5a9ff;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   MAIN LAYOUT
+========================================== */
+
+.app-shell {
+  min-height: 100vh;
+  padding: 55px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(
+    135deg,
+    #e9e6ff 0%,
+    #f7f7ff 55%,
+    #e8f0ff 100%
+  );
+}
+
+.app-card {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 15px 45px rgba(53, 45, 120, 0.1);
+  overflow: hidden;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.app-header {
+  padding: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(
+    135deg,
+    #5b5bd6,
+    #8274e8
+  );
+  color: white;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.app-header h1 {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #eeecff;
+  max-width: 430px;
+}
+
+.task-count {
+  min-width: 95px;
+  padding: 16px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.16);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-count strong {
+  font-size: 30px;
+}
+
+.task-count span {
+  font-size: 12px;
+}
+
+/* ==========================================
+   ADD TASK FORM
+========================================== */
+
+.task-form {
+  padding: 30px 35px 20px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.input-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px 17px;
+  border: 1px solid #d9dcec;
+  border-radius: 11px;
+  background: #fafaff;
+  color: #252b43;
+  font-size: 14px;
+}
+
+.input-row input:focus {
+  border-color: #8274e8;
+}
+
+.primary-btn {
+  padding: 15px 22px;
+  border: none;
+  border-radius: 11px;
+  background: #5b5bd6;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.primary-btn:hover {
+  background: #4545b8;
+}
+
+.error-message {
+  color: #d43b53;
+  font-size: 13px;
+  margin-top: 9px;
+}
+
+/* ==========================================
+   FILTER TOOLBAR
+========================================== */
+
+.toolbar {
+  padding: 5px 35px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 9px 16px;
+  border: 1px solid #e4e5f0;
+  border-radius: 9px;
+  background: #f6f6fb;
+  color: #60657a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  background: #e9e7ff;
+}
+
+.filter-btn.active {
+  background: #5b5bd6;
+  color: white;
+  border-color: #5b5bd6;
+}
+
+.clear-btn {
+  padding: 9px 13px;
+  border: none;
+  border-radius: 9px;
+  background: #fff0f2;
+  color: #cc4459;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.clear-btn:hover {
+  background: #ffe1e6;
+}
+
+/* ==========================================
+   SEARCH BAR
+========================================== */
+
+.search-section {
+  padding: 0 35px 25px;
+}
+
+.search-section input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d9dcec;
+  border-radius: 11px;
+  background: #fafaff;
+  color: #252b43;
+  font-size: 14px;
+}
+
+.search-section input:focus {
+  border-color: #8274e8;
+}
+
+/* ==========================================
+   TASK LIST
+========================================== */
+
+.task-list {
+  list-style: none;
+  padding: 0 35px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 17px;
+  border: 1px solid #e7e8f1;
+  border-radius: 13px;
+  background: #ffffff;
+  transition: background 0.2s ease;
+}
+
+.task-item:hover {
+  background: #fafaff;
+}
+
+.task-item.completed {
+  background: #f5faf7;
+  border-color: #d8ecdf;
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.task-content input {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  accent-color: #5b5bd6;
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #30364d;
+  overflow-wrap: anywhere;
+}
+
+.completed .task-title {
+  text-decoration: line-through;
+  color: #8b91a0;
+}
+
+/* ==========================================
+   TASK ACTION BUTTONS
+========================================== */
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background: #eceaff;
+  color: #5b5bd6;
+}
+
+.edit-btn:hover {
+  background: #dedaff;
+}
+
+.delete-btn {
+  background: #ffebee;
+  color: #cc4459;
+}
+
+.delete-btn:hover {
+  background: #ffdce2;
+}
+
+.save-btn {
+  background: #5b5bd6;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #4545b8;
+}
+
+.cancel-btn {
+  background: #eef0f6;
+  color: #50566c;
+}
+
+/* ==========================================
+   EDIT TASK FORM
+========================================== */
+
+.edit-form {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.edit-form input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px 12px;
+  border: 1px solid #d9dcec;
+  border-radius: 8px;
+  background: white;
+}
+
+.edit-form .error-message {
+  flex-basis: 100%;
+}
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-state {
+  margin: 0 35px 25px;
+  padding: 45px 20px;
+  text-align: center;
+  border: 2px dashed #e4e2f4;
+  border-radius: 14px;
+  background: #fafaff;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  color: #4e526c;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  font-size: 13px;
+  color: #8b90a4;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.app-footer {
+  padding: 20px 35px;
+  border-top: 1px solid #ececf4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  background: #fbfbff;
+}
+
+.app-footer span {
+  font-size: 12px;
+  color: #8a90a3;
+}
+
+.reset-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #fff0f2;
+  color: #cc4459;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reset-btn:hover {
+  background: #ffe0e5;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 650px) {
+  .app-shell {
+    padding: 20px 12px;
+  }
+
+  .app-card {
+    border-radius: 16px;
+  }
+
+  .app-header {
+    padding: 25px 20px;
+    align-items: flex-start;
+  }
+
+  .app-header h1 {
+    font-size: 32px;
+  }
+
+  .task-count {
+    min-width: 70px;
+    padding: 12px;
+  }
+
+  .task-count strong {
+    font-size: 23px;
+  }
+
+  .task-form,
+  .search-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary-btn {
+    width: 100%;
+  }
+
+  .toolbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .task-list {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+  }
+
+  .task-actions {
+    margin-left: 30px;
+  }
+
+  .empty-state {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .app-footer {
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-header {
+    flex-direction: column;
+  }
+
+  .task-count {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filters {
+    width: 100%;
+  }
+
+  .filter-btn {
+    flex: 1;
+  }
+}
