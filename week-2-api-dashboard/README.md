@@ -1,16 +1,115 @@
-# React + Vite
+# Product Management API Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## AUREX Full Stack Development Internship — Month 2, Week 2
 
-Currently, two official plugins are available:
+A responsive Product Management Dashboard built using React.js and Vite. The application integrates two public APIs to fetch and display products with search, category filtering, pagination, and detailed product information.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+https://aurex-week-2-api-dashboard.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## GitHub Repository
 
-## Expanding the ESLint configuration
+https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2/tree/main/week-2-api-dashboard
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- Fetches and displays 40 products from two APIs
+- Product search by title
+- Category-based filtering
+- Pagination with 8 products per page
+- Product details displayed in a right-side drawer
+- Product images, prices, ratings, descriptions, and available product information
+- Loading and error handling
+- Responsive layout for desktop, tablet, and mobile
+- Cream and Terracotta modern UI theme
+
+## Technologies Used
+
+- React.js
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+- Vite
+- Fetch API
+- Git and GitHub
+- Vercel
+
+## APIs Used
+
+1. Fake Store API — https://fakestoreapi.com/
+2. DummyJSON API — https://dummyjson.com/
+
+## Project Structure
+
+```text
+week-2-api-dashboard/
+├── public/
+│   ├── images/
+│   └── placeholder.svg
+├── src/
+│   ├── components/
+│   │   ├── ProductCard.jsx
+│   │   ├── ProductDetails.jsx
+│   │   ├── ProductList.jsx
+│   │   └── SearchFilter.jsx
+│   ├── services/
+│   │   └── productApi.js
+│   ├── styles/
+│   │   └── main.css
+│   ├── App.jsx
+│   ├── App.css
+│   └── main.jsx
+├── package.json
+├── vite.config.js
+├── vercel.json
+└── README.md
+```
+
+## Installation and Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd aurex-fullstack-internship-month2/week-2-api-dashboard
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in the terminal.
+
+## Deployment
+
+The application is deployed on Vercel. The project uses Vercel rewrites to proxy requests to Fake Store API and DummyJSON.
+
+## Internship Details
+
+**Internship:** AUREX Full Stack Development Internship
+
+**Month:** 2
+
+**Week:** 2
+
+**Task:** Product Management API Dashboard
+
+**Status:** Completed
+
+---
+
+Developed as part of the AUREX Full Stack Development Internship.
