@@ -1,0 +1,177 @@
+
+.app-page {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: #f7f4ef;
+  font-family: "Segoe UI", sans-serif;
+  color: #302b27;
+}
+
+.task-container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.eyebrow {
+  color: #a46b4e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.app-header h1 {
+  font-size: 46px;
+  margin: 12px 0;
+}
+
+.app-header p {
+  color: #837a72;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stats > div {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 5px 25px #302b2708;
+}
+
+.stats strong {
+  display: block;
+  font-size: 30px;
+  color: #a46b4e;
+}
+
+.stats span {
+  font-size: 13px;
+  color: #837a72;
+}
+
+.task-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.task-form input,
+.edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e5ddd5;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #a46b4e;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #88553d;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.task-list {
+  display: grid;
+  gap: 12px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+.task-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #a46b4e;
+}
+
+.task-title {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.delete-btn {
+  background: #c96b6b;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: #ae5050;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 35px;
+  color: #837a72;
+}
+
+.error-message {
+  color: #b33b3b;
+  background: #fff0f0;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .app-page {
+    padding: 30px 12px;
+  }
+
+  .app-header h1 {
+    font-size: 34px;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .stats > div {
+    padding: 15px 8px;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+  }
+
+  .task-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
