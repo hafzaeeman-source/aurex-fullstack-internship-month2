@@ -1,92 +1,132 @@
-# Full Stack Task Manager
+# AUREX Internship — Week 4 Full Stack Task Manager
 
-## AUREX Full Stack Development Internship — Month 2, Week 4
+A full-stack task management web application developed as part of the **AUREX Full Stack Engineering Internship — Month 2, Week 4**.
 
-A full stack Task Manager application developed using React.js, Node.js, and Express.js. The application provides CRUD functionality through a REST API and a responsive user interface.
+The application allows users to register, log in, and manage their personal tasks securely using React, Node.js, Express.js, MongoDB Atlas, and JWT authentication.
 
 ## Features
 
-- Add new tasks
-- Display all tasks
-- Edit existing tasks
-- Delete tasks
-- Mark tasks as completed or pending
-- View total, completed, and pending task counts
+- User registration and login
+- Secure password hashing using bcryptjs
+- JWT-based authentication
+- Protected dashboard and API routes
+- Create, view, update, complete, and delete tasks
+- Filter tasks by All, Pending, and Completed
+- User-specific task management
+- Task statistics dashboard
+- Persistent task storage in MongoDB Atlas
 - Responsive user interface
-- REST API integration
 - Loading and error handling
+- Logout functionality
 
 ## Technologies Used
 
-**Frontend:** React.js, Vite, JavaScript, HTML5, CSS3
+**Frontend**
+- React.js
+- Vite
+- JavaScript
+- HTML5 and CSS3
+- React Router DOM
 
-**Backend:** Node.js, Express.js
+**Backend**
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JSON Web Token (JWT)
+- bcryptjs
+- dotenv
+- CORS
 
-**Tools:** Git, GitHub, VS Code
-
-**Database:** MongoDB Atlas and Mongoose (planned integration)
+**Development Tools**
+- Visual Studio Code
+- Git and GitHub
+- Postman
+- MongoDB Atlas
 
 ## Project Structure
 
 ```text
 week-4-fullstack-task-manager/
 ├── client/
-│   ├── public/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── TaskForm.jsx
 │   │   │   ├── TaskItem.jsx
 │   │   │   └── TaskList.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   ├── pages/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── Dashboard.jsx
 │   │   ├── services/
+│   │   │   ├── authApi.js
 │   │   │   └── taskApi.js
 │   │   ├── App.jsx
 │   │   ├── App.css
+│   │   ├── index.css
 │   │   └── main.jsx
+│   ├── vite.config.js
 │   └── package.json
 ├── server/
+│   ├── config/
+│   │   └── db.js
 │   ├── controllers/
+│   │   ├── authController.js
 │   │   └── taskController.js
-│   ├── data/
-│   │   └── tasks.js
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Task.js
 │   ├── routes/
+│   │   ├── authRoutes.js
 │   │   └── taskRoutes.js
 │   ├── server.js
 │   └── package.json
 └── README.md
 ```
 
-## REST API Endpoints
+## Installation and Setup
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/tasks` | Retrieve all tasks |
-| POST | `/api/tasks` | Create a task |
-| PUT | `/api/tasks/:id` | Update a task |
-| DELETE | `/api/tasks/:id` | Delete a task |
-
-## Installation
-
-Clone the repository:
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2.git
-```
-
-Navigate to the Week 4 folder:
-
-```bash
 cd aurex-fullstack-internship-month2/week-4-fullstack-task-manager
 ```
 
-Install and start the backend:
+### 2. Backend Setup
 
 ```bash
 cd server
 npm install
+```
+
+Create a `.env` file inside the `server` folder:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_secure_random_jwt_secret
+```
+
+Replace the placeholders with your own credentials. Never commit the `.env` file.
+
+Start the backend:
+
+```bash
 npm run dev
 ```
 
-Open another terminal and start the frontend:
+The backend runs at:
+
+`http://localhost:5000`
+
+### 3. Frontend Setup
+
+Open another terminal:
 
 ```bash
 cd client
@@ -94,34 +134,85 @@ npm install
 npm run dev
 ```
 
-The backend runs on `http://localhost:5000` and the frontend normally runs on `http://localhost:5173`.
+The frontend runs at:
 
-## Current Data Storage
+`http://localhost:5173`
 
-The application currently stores tasks in server memory. Changes are not permanent and will reset when the backend restarts.
+The Vite development proxy forwards `/api` requests to the Express backend.
 
-MongoDB Atlas integration is planned to provide persistent storage.
+## API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login and receive JWT |
+| GET | `/api/auth/me` | Get authenticated user profile |
+
+### Task Management
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/tasks` | Get current user's tasks |
+| POST | `/api/tasks` | Create a task |
+| PUT | `/api/tasks/:id` | Update task details or completion |
+| DELETE | `/api/tasks/:id` | Delete a task |
+
+Task endpoints require a JWT in the `Authorization: Bearer <token>` header.
+
+Optional filtering is available using `GET /api/tasks?completed=true` or `GET /api/tasks?completed=false`.
+
+## Database
+
+MongoDB Atlas is used to store application data.
+
+**Database:** `aurex_week4_taskmanager`
+
+**Collections:**
+- `users` — registered user information and hashed passwords
+- `tasks` — user-specific task records and completion status
+
+Mongoose models are used to define schemas and interact with MongoDB.
+
+## API Testing
+
+The backend APIs were tested using Postman, including:
+
+- Registration and login
+- JWT-protected user profile
+- Create task
+- Retrieve tasks
+- Update task
+- Delete task
+
+## Security
+
+- Passwords are hashed before storage.
+- JWT authentication protects private endpoints.
+- Tasks are associated with their owners.
+- Environment variables store database credentials and JWT secrets.
+- The `.env` file is excluded from Git.
 
 ## Deployment
 
-Frontend: Vercel (pending)
+**Status:** Local development and API testing completed. Production deployment pending.
 
-Backend: Public hosting (pending)
+## Internship Information
 
-## Internship Details
+**Program:** AUREX Full Stack Engineering Internship  
+**Month:** 2  
+**Week:** 4  
+**Project:** Full Stack Task Manager  
+**Repository:** https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2
 
-**Organization:** AUREX
+## Future Improvements
 
-**Internship:** Full Stack Development
-
-**Month:** 2
-
-**Week:** 4
-
-**Project:** Full Stack Task Manager
-
-**Status:** Frontend and backend implemented; deployment and database integration pending.
+- Password reset functionality
+- Task priorities and deadlines
+- Search and sorting
+- Production deployment
 
 ---
 
-Developed as part of the AUREX Full Stack Development Internship.
+Developed as part of the AUREX Full Stack Engineering Internship.
