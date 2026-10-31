@@ -1,48 +1,48 @@
 # AUREX Internship — Week 4 Full Stack Task Manager
 
-A full-stack task management web application developed as part of the **AUREX Full Stack Engineering Internship — Month 2, Week 4**.
+A full-stack Task Manager application developed as part of the **AUREX Full Stack Engineering Internship — Month 2, Week 4**.
 
-The application allows users to register, log in, and manage their personal tasks securely using React, Node.js, Express.js, MongoDB Atlas, and JWT authentication.
+The application allows users to register, log in, and manage their personal tasks using React.js, Node.js, Express.js, MongoDB Atlas, and JWT authentication.
+
+## Live Deployment
+
+- **Frontend:** [Live Task Manager](https://aurex-fullstack-internship-month2-a.vercel.app)
+- **Backend:** [Live REST API](https://aurex-fullstack-internship-month2-c.vercel.app)
+- **GitHub:** [Source Code](https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2)
+
+**Deployment:** Vercel (Frontend and Backend)  
+**Database:** MongoDB Atlas
+
+*Note: The live frontend and backend have been deployed. End-to-end authentication and task management testing is still pending.*
 
 ## Features
 
 - User registration and login
-- Secure password hashing using bcryptjs
 - JWT-based authentication
+- Password hashing using bcryptjs
 - Protected dashboard and API routes
-- Create, view, update, complete, and delete tasks
+- Create, read, update, and delete tasks
+- Mark tasks as completed or pending
 - Filter tasks by All, Pending, and Completed
-- User-specific task management
 - Task statistics dashboard
-- Persistent task storage in MongoDB Atlas
+- User-specific task management
+- MongoDB Atlas database integration
 - Responsive user interface
-- Loading and error handling
 - Logout functionality
+- Error and loading states
 
 ## Technologies Used
 
-**Frontend**
-- React.js
-- Vite
-- JavaScript
-- HTML5 and CSS3
-- React Router DOM
-
-**Backend**
-- Node.js
-- Express.js
-- MongoDB Atlas
-- Mongoose
-- JSON Web Token (JWT)
-- bcryptjs
-- dotenv
-- CORS
-
-**Development Tools**
-- Visual Studio Code
-- Git and GitHub
-- Postman
-- MongoDB Atlas
+| Category | Technologies |
+|---|---|
+| Frontend | React.js, Vite, JavaScript, HTML5, CSS3 |
+| Routing | React Router DOM |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas, Mongoose |
+| Authentication | JWT, bcryptjs |
+| API Testing | Postman |
+| Deployment | Vercel |
+| Version Control | Git, GitHub |
 
 ## Project Structure
 
@@ -67,9 +67,13 @@ week-4-fullstack-task-manager/
 │   │   ├── App.css
 │   │   ├── index.css
 │   │   └── main.jsx
+│   ├── .env.production
 │   ├── vite.config.js
+│   ├── vercel.json
 │   └── package.json
 ├── server/
+│   ├── api/
+│   │   └── index.js
 │   ├── config/
 │   │   └── db.js
 │   ├── controllers/
@@ -84,6 +88,7 @@ week-4-fullstack-task-manager/
 │   │   ├── authRoutes.js
 │   │   └── taskRoutes.js
 │   ├── server.js
+│   ├── vercel.json
 │   └── package.json
 └── README.md
 ```
@@ -104,7 +109,7 @@ cd server
 npm install
 ```
 
-Create a `.env` file inside the `server` folder:
+Create a `.env` file inside the `server` directory:
 
 ```env
 PORT=5000
@@ -112,21 +117,17 @@ MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_secure_random_jwt_secret
 ```
 
-Replace the placeholders with your own credentials. Never commit the `.env` file.
-
 Start the backend:
 
 ```bash
 npm run dev
 ```
 
-The backend runs at:
-
-`http://localhost:5000`
+Backend URL: `http://localhost:5000`
 
 ### 3. Frontend Setup
 
-Open another terminal:
+Open another terminal from the Week 4 project directory:
 
 ```bash
 cd client
@@ -134,11 +135,9 @@ npm install
 npm run dev
 ```
 
-The frontend runs at:
+Frontend URL: `http://localhost:5173`
 
-`http://localhost:5173`
-
-The Vite development proxy forwards `/api` requests to the Express backend.
+The frontend uses the Vite development proxy locally and the `VITE_API_URL` environment variable for production.
 
 ## API Endpoints
 
@@ -147,71 +146,64 @@ The Vite development proxy forwards `/api` requests to the Express backend.
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login and receive JWT |
-| GET | `/api/auth/me` | Get authenticated user profile |
+| POST | `/api/auth/login` | Log in and receive JWT |
+| GET | `/api/auth/me` | Retrieve authenticated user |
 
 ### Task Management
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/tasks` | Get current user's tasks |
-| POST | `/api/tasks` | Create a task |
-| PUT | `/api/tasks/:id` | Update task details or completion |
+| GET | `/api/tasks` | Retrieve user's tasks |
+| POST | `/api/tasks` | Create a new task |
+| PUT | `/api/tasks/:id` | Update an existing task |
 | DELETE | `/api/tasks/:id` | Delete a task |
 
-Task endpoints require a JWT in the `Authorization: Bearer <token>` header.
-
-Optional filtering is available using `GET /api/tasks?completed=true` or `GET /api/tasks?completed=false`.
+Protected endpoints require an `Authorization: Bearer <token>` header.
 
 ## Database
 
-MongoDB Atlas is used to store application data.
+The application uses **MongoDB Atlas** with Mongoose.
 
-**Database:** `aurex_week4_taskmanager`
+Database name: `aurex_week4_taskmanager`
 
-**Collections:**
-- `users` — registered user information and hashed passwords
-- `tasks` — user-specific task records and completion status
-
-Mongoose models are used to define schemas and interact with MongoDB.
+Collections:
+- `users` — registered users and hashed passwords
+- `tasks` — task records linked to individual users
 
 ## API Testing
 
-The backend APIs were tested using Postman, including:
+The backend endpoints were tested locally using Postman, including registration, login, authenticated user retrieval, and task CRUD operations.
 
-- Registration and login
-- JWT-protected user profile
-- Create task
-- Retrieve tasks
-- Update task
-- Delete task
+Live end-to-end testing is pending.
 
 ## Security
 
-- Passwords are hashed before storage.
-- JWT authentication protects private endpoints.
-- Tasks are associated with their owners.
-- Environment variables store database credentials and JWT secrets.
-- The `.env` file is excluded from Git.
+- Passwords are stored as hashes.
+- JWT protects authenticated API routes.
+- Users can access only their own tasks.
+- Sensitive credentials are stored in environment variables.
+- The backend `.env` file must not be committed to GitHub.
 
 ## Deployment
 
-**Status:** Local development and API testing completed. Production deployment pending.
+The React frontend and Express backend are deployed as separate Vercel projects. MongoDB Atlas provides database storage.
 
-## Internship Information
+The frontend uses `VITE_API_URL` to connect to the deployed backend.
 
-**Program:** AUREX Full Stack Engineering Internship  
+## Future Enhancements
+
+- Task priorities and due dates
+- Search and sorting
+- Password reset
+- Additional task analytics
+
+## Internship Details
+
+**Organization:** AUREX  
+**Program:** Full Stack Engineering Internship  
 **Month:** 2  
 **Week:** 4  
-**Project:** Full Stack Task Manager  
-**Repository:** https://github.com/hafzaeeman-source/aurex-fullstack-internship-month2
-
-## Future Improvements
-
-- Password reset functionality
-- Task priorities and deadlines
-- Search and sorting
-- Production deployment
+**Project:** Full Stack Task Manager
 
 ---
 
