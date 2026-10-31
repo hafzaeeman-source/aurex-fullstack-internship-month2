@@ -1,0 +1,80 @@
+{
+  "info": {
+    "name": "AUREX Week 3 MongoDB CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5001"
+    },
+    {
+      "key": "itemId",
+      "value": "REPLACE_WITH_CREATED_ITEM_ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/"
+      }
+    },
+    {
+      "name": "Create Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Notebook\",\n  \"description\": \"A4 ruled notebook\",\n  \"quantity\": 10,\n  \"category\": \"Stationery\"\n}"
+        },
+        "url": "{{baseUrl}}/api/items"
+      }
+    },
+    {
+      "name": "Get All Items",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/items"
+      }
+    },
+    {
+      "name": "Get Item By ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/items/{{itemId}}"
+      }
+    },
+    {
+      "name": "Update Item",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 20\n}"
+        },
+        "url": "{{baseUrl}}/api/items/{{itemId}}"
+      }
+    },
+    {
+      "name": "Delete Item",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/items/{{itemId}}"
+      }
+    }
+  ]
+}
