@@ -1,24 +1,32 @@
 
 import TaskItem from "./TaskItem";
 
-function TaskList({ tasks, onUpdate, onDelete, busy }) {
+export default function TaskList({
+  tasks,
+  onToggle,
+  onDelete,
+  onUpdate
+}) {
   if (tasks.length === 0) {
-    return <p className="empty-message">No tasks yet. Add your first task!</p>;
+    return (
+      <div className="empty-state">
+        <h3>No tasks found</h3>
+        <p>Add a task or select another filter.</p>
+      </div>
+    );
   }
 
   return (
     <div className="task-list">
       {tasks.map((task) => (
         <TaskItem
-          key={task.id}
+          key={task._id}
           task={task}
-          onUpdate={onUpdate}
+          onToggle={onToggle}
           onDelete={onDelete}
-          busy={busy}
+          onUpdate={onUpdate}
         />
       ))}
     </div>
   );
 }
-
-export default TaskList;

@@ -1,26 +1,45 @@
 
 import { useState } from "react";
 
-function TaskItem({ task, onUpdate, onDelete, busy }) {
+export default function TaskItem({
+  task,
+  onToggle,
+  onDelete,
+  onUpdate
+}) {
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(task.title);
+  const [busy, setBusy] = useState(false);
+
+  const runAction = async (action) => {
+    setBusy(true);
+
+    try {
+      await action();
+    } catch {
+      // Dashboard displays the request error.
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const saveEdit = async () => {
     if (!title.trim()) return;
 
-    const success = await onUpdate(task.id, { title: title.trim() });
-
-    if (success) setEditing(false);
+    await runAction(async () => {
+      await onUpdate(task._id, { title: title.trim() });
+      setEditing(false);
+    });
   };
 
   return (
-    <div className={`task-item ${task.completed ? "completed" : ""}`}>
+    <div className={`task-item ${task.completed ? "done" : ""}`}>
       <input
         type="checkbox"
         checked={task.completed}
         disabled={busy}
         onChange={() =>
-          onUpdate(task.id, { completed: !task.completed })
+          runAction(() => onToggle(task))
         }
       />
 
@@ -29,7 +48,6 @@ function TaskItem({ task, onUpdate, onDelete, busy }) {
           className="edit-input"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          disabled={busy}
         />
       ) : (
         <span className="task-title">{task.title}</span>
@@ -38,26 +56,29 @@ function TaskItem({ task, onUpdate, onDelete, busy }) {
       <div className="task-actions">
         {editing ? (
           <>
-            <button onClick={saveEdit} disabled={busy || !title.trim()}>
+            <button disabled={busy} onClick={saveEdit}>
               Save
             </button>
-            <button onClick={() => {
-              setTitle(task.title);
-              setEditing(false);
-            }} disabled={busy}>
+            <button
+              disabled={busy}
+              onClick={() => {
+                setTitle(task.title);
+                setEditing(false);
+              }}
+            >
               Cancel
             </button>
           </>
         ) : (
-          <button onClick={() => setEditing(true)} disabled={busy}>
+          <button disabled={busy} onClick={() => setEditing(true)}>
             Edit
           </button>
         )}
 
         <button
           className="delete-btn"
-          onClick={() => onDelete(task.id)}
           disabled={busy}
+          onClick={() => runAction(() => onDelete(task._id))}
         >
           Delete
         </button>
@@ -65,5 +86,3 @@ function TaskItem({ task, onUpdate, onDelete, busy }) {
     </div>
   );
 }
-
-export default TaskItem;
