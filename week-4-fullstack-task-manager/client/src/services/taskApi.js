@@ -1,5 +1,5 @@
 
-const API_URL = "/api/tasks";
+const API_URL = `${import.meta.env.VITE_API_URL || ""}/api/tasks`;
 
 const request = async (url, token, options = {}) => {
   const response = await fetch(url, {
